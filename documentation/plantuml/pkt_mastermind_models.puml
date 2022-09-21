@@ -1,0 +1,68 @@
+@startuml mastermind.models
+
+class  mastermind.models.Game{
+    - board: Game
+    + Game()
+    + isWinner(): Boolean
+    + isLooser(): Boolean
+    + addProposedCombination(Combination)
+    + getProposedCombination(int): Combination
+    + getResult(int): Result
+}
+
+mastermind.models.Game *--> "n" mastermind.models.ProposedCombination
+mastermind.models.Game *--> "n" mastermind.models.Result
+mastermind.models.Game *--> mastermind.models.SecretCombination
+mastermind.models.Game --> mastermind.models.State
+
+class  mastermind.models.State{
+    - stateValue: StateValue
+    + State()
+    + next(): void
+    + reset(): void
+    + getValueState(): StateValue
+}
+
+enum mastermind.models.Color{
+    + RED 
+	+ BLUE 
+	+ YELLOW 
+	+ GREEN 
+	+ ORANGE 
+	+ PURPLE
+    # length()
+}
+
+abstract class mastermind.models.Combination{
+    - WIDTH
+    # colors: Color[]
+    # Combination()
+    + getWidth(): int
+}
+
+class mastermind.models.ProposedCombination{
+    # contains(Color, position)
+    # contains(Color)
+    + getColors(): Color[]
+}
+
+class mastermind.models.SecretCombination{
+    # SecretCombination()
+    # getResult(ProposedCombination): Result 
+}
+
+class mastermind.models.Result{
+    - blacks
+    - whites
+    ~ isWinner()
+    + getBlacks(): int
+    + getWhites(): int
+}
+
+mastermind.models.ProposedCombination -up-|> mastermind.models.Combination
+mastermind.models.SecretCombination -up-|> mastermind.models.Combination
+mastermind.models.Combination *-up-> mastermind.models.Color
+mastermind.models.State *-down-> mastermind.models.StateValue
+mastermind.models.SecretCombination ..> mastermind.models.Result
+
+@enduml

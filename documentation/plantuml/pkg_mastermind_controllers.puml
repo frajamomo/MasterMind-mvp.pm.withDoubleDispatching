@@ -1,0 +1,62 @@
+@startuml mastermind.controllers
+
+class  mastermind.controllers.UseCaseController{
+# game: Game
+# state: State
+~ UseCaseController(Game, State)
++ {abstract} accept(ControllersVisitor): void
+}
+mastermind.controllers.UseCaseController -down-> mastermind.models.Game
+mastermind.controllers.UseCaseController -down-> mastermind.models.State
+mastermind.controllers.UseCaseController ..> mastermind.controllers.ControllersVisitor
+class  mastermind.controllers.ControllersVisitor{
+~ visit(StartController): void
+~ visit(PlayController): void
+~ visit(ResumeController): void
+}
+mastermind.controllers.ControllersVisitor ..> mastermind.controllers.ResumeController
+mastermind.controllers.ControllersVisitor ..> mastermind.controllers.StartController
+mastermind.controllers.ControllersVisitor ..> mastermind.controllers.PlayController
+
+class  mastermind.controllers.Logic{
+- state: State
+- game: Game
+- controllers: Map<StateValue, UseCaseController>
++ Logic()
++ getUseCaseController(): UseCaseController
+}
+mastermind.controllers.Logic *-down-> mastermind.models.Game
+mastermind.controllers.Logic *-down-> mastermind.models.State
+mastermind.controllers.Logic --> mastermind.controllers.UseCaseController
+mastermind.controllers.Logic *-down-> mastermind.models.StateValue
+mastermind.controllers.Logic *-down-> java.util.Map
+mastermind.controllers.Logic *-down-> java.util.HashMap
+
+class  mastermind.controllers.PlayController{
++ PlayController(Game, State)
++ addProposedCombination(ProposedCombination)
++ isWinner(): Boolean
++ isLooser(): Boolean
++ continueState(): void
++ accept(ControllersVisitor): void
+}
+mastermind.controllers.UseCaseController <|-down- mastermind.controllers.PlayController
+mastermind.controllers.PlayController ..> mastermind.models.ProposedCombination
+
+class  mastermind.controllers.ResumeController{
++ ResumeController(Game, State)
++ resume(boolean): void
++ accept(ControllersVisitor): void
+}
+
+mastermind.controllers.UseCaseController <|-down- mastermind.controllers.ResumeController
+class  mastermind.controllers.StartController{
++ StartController(Game, State)
++ start(): void
++ accept(ControllersVisitor): void
+}
+mastermind.controllers.UseCaseController <|-down- mastermind.controllers.StartController
+mastermind.controllers.StartController ..> mastermind.models.Game
+mastermind.controllers.StartController ..> mastermind.models.State
+
+@enduml

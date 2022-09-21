@@ -1,0 +1,34 @@
+@startuml mastermind.utils
+
+class  utils.Console << Singleton >> {
+- console: Console
+- bufferedReader: BufferedReader
+- Console()
++ instance()
++ write(char): void
++ write(String): void
++ readInt(String): int
++ readChar(String): char
++ readString(String): String
++ writeln(int): void
++ writeln(String): void
++ writeln(): void
++ writeError(String): void
+}
+
+utils.Console *-down-> java.io.BufferedReader
+utils.Console *-down-> java.io.InputStreamReader
+utils.YesNoDialog .left.> utils.Console
+
+class  utils.YesNoDialog{
+- {static} AFIRMATIVE: char
+- {static} NEGATIVE: char
+- {static} QUESTION: String
+- {static} MESSAGE: String
++ YesNoDialog()
++ read(String): boolean
+- {static} isNegative(char): boolean
+- {static} isAfirmative(char): boolean
+}
+
+@enduml

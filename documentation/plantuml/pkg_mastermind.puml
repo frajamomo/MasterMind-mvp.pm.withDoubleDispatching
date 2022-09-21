@@ -1,0 +1,21 @@
+@startuml mastermind
+
+class  mastermind.ConsoleMastermind{
++ {static} main(String[]): void
+# createView(): View
+}
+
+mastermind.Mastermind <|-down- mastermind.ConsoleMastermind
+
+class  mastermind.Mastermind{
+- logic: Logic
+- view: View
+# Mastermind()
+# {abstract} createView(): View
+# play(): void
+}
+
+mastermind.Mastermind --> mastermind.views.View
+mastermind.Mastermind *-down-> mastermind.controllers.Logic
+
+@enduml
