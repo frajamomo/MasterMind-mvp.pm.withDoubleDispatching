@@ -21,18 +21,9 @@ public class Logic {
         this.controllers.put(StateValue.IN_GAME, new PlayController(this.game, this.state));
         this.controllers.put(StateValue.RESUME, new ResumeController(this.game, this.state));
         this.controllers.put(StateValue.EXIT, null);
-
     }
 
     public UseCaseController getController() {
         return this.controllers.get(this.state.getValueState());
     }
-
-
-    
-    
-
-    
-
-    
 }

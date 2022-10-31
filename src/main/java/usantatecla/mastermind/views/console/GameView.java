@@ -16,7 +16,4 @@ class GameView {
             new ResultView(this.controller.getResult(i)).writeln();
         }
     }
-
-
-    
 }

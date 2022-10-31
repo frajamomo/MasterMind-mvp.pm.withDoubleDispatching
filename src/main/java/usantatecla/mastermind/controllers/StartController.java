@@ -13,5 +13,4 @@ public class StartController extends UseCaseController{
     public void accept(ControllerVisitor controllerVisitor) {
         controllerVisitor.visit(this);
     }
-    
 }

@@ -17,11 +17,11 @@ public abstract class UseCaseController {
         this.state = state;
     }
 
-	public ProposedCombination getProposedCombination(int position) {
+    public ProposedCombination getProposedCombination(int position) {
         return this.game.getProposedCombination(position);
-	}
+    }
 
-	public int getAttempts() {
+    public int getAttempts() {
         return this.game.getAttempts();
     }
     
@@ -38,5 +38,4 @@ public abstract class UseCaseController {
     }
 
     public abstract void accept(ControllerVisitor controllerVisitor);
-
 }

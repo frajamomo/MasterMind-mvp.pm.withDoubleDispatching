@@ -35,8 +35,4 @@ public class View extends usantatecla.mastermind.views.View implements Controlle
     public void visit (ResumeController resumeController) {
         this.resumeView.interact(resumeController);
     }
-
-
-
-
 }

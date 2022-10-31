@@ -10,4 +10,3 @@ class StartView {
         startController.next();
     }
 }
-
